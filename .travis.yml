@@ -12,4 +12,4 @@ install:
 
 script:
 # Role syntax
-- ansible-playbook -i "localhost," -c local deploy.yml --syntax-check
+- ansible-playbook -i "localhost," -c local main.yml --syntax-check
