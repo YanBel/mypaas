@@ -19,4 +19,4 @@ script:
 # Building Docker image to run mypaas playbook
 - docker build -t "mypaas" .
 # Role syntax
-#- ansible-playbook -i "localhost," -c local main.yml --syntax-check
+- ansible-playbook -i "localhost," -c local main.yml --syntax-check
