@@ -1,6 +1,6 @@
 FROM python:2.7-alpine
 RUN mkdir /mypaas
-ADD * /mypaas
+ADD * /mypaas/
 WORKDIR /mypaas
 RUN pip install ansible; \
     pip install ovh
