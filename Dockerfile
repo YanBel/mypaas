@@ -7,3 +7,4 @@ RUN pip install ansible; \
 
 CMD sh genpass.sh
 RUN echo "Container Ready"
+CMD ansible-playbook -i "localhost," -c local main.yml --syntax-check
