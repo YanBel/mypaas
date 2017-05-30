@@ -5,7 +5,7 @@ WORKDIR /mypaas
 RUN     echo "===> Installing sudo to emulate normal OS behavior..." && \
         apk --update add sudo && \
         echo "===> Adding Python runtime..." && \
-        apk --update add python py-pip openssl ca-certificates && \
+        apk --update add python py-pip openssl ca-certificates pwgen && \
         apk --update add --virtual build-dependencies python-dev libffi-dev openssl-dev build-base && \
         pip install --upgrade pip cffi ovh && \
         echo "===> Installing Ansible..." && \
@@ -13,7 +13,7 @@ RUN     echo "===> Installing sudo to emulate normal OS behavior..." && \
         echo "===> Removing package list..." && \
         apk del build-dependencies && \
         rm -rf /var/cache/apk/* && \
-        apt-get install pwgen
+        
 
 
 RUN sh genpass.sh
