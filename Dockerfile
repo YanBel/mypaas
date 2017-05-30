@@ -12,7 +12,7 @@ RUN     echo "===> Installing sudo to emulate normal OS behavior..." && \
         pip install ansible==2.3.0.0 && \
         echo "===> Removing package list..." && \
         apk del build-dependencies && \
-        rm -rf /var/cache/apk/* && \
+        rm -rf /var/cache/apk/*
         
 
 
