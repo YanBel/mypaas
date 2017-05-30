@@ -14,7 +14,4 @@ RUN     echo "===> Installing sudo to emulate normal OS behavior..." && \
         apk del build-dependencies && \
         rm -rf /var/cache/apk/*
         
-
-
-RUN sh genpass.sh
 RUN echo "Container Ready"
