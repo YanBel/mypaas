@@ -21,11 +21,12 @@ RUN echo "===> Adding Ansible's PPA..."  && \
 
 RUN pip install --upgrade pip && \
     pip install ovh
+RUN     mkdir /mypaas
+ADD     * /mypaas/
+WORKDIR /mypaas
 ONBUILD  RUN  DEBIAN_FRONTEND=noninteractive  apt-get update   && \
               echo "===> Updating TLS certificates..."         && \
               apt-get install -y openssl ca-certificates
-ONBUILD  WORKDIR  /tmp
-ONBUILD  COPY  .  /tmp
 ONBUILD  RUN  \
               echo "===> Diagnosis: host information..."  && \
               ansible -c local -m setup all
