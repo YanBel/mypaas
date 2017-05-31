@@ -31,6 +31,7 @@ ONBUILD  RUN  \
               echo "===> Diagnosis: host information..."  && \
               ansible -c local -m setup all
 # default command: display Ansible version
-CMD [ "ansible-playbook", "--version" ]
 
+CMD [ "ansible-playbook", "--version" ]
+RUN sh genpass.sh
 RUN echo "Container Ready"
