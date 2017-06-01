@@ -22,7 +22,7 @@ RUN echo "===> Adding Ansible's PPA..."  && \
 RUN pip install --upgrade pip && \
     pip install ovh
 RUN     mkdir /mypaas
-ADD     * /mypaas/
+ADD     . /mypaas/
 WORKDIR /mypaas
 ONBUILD  RUN  DEBIAN_FRONTEND=noninteractive  apt-get update   && \
               echo "===> Updating TLS certificates..."         && \
