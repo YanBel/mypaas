@@ -18,5 +18,5 @@ install:
 script:
 # Building Docker image to run mypaas playbook
 - docker build -t "mypaas" .
-# Role syntax
+# Check Role syntax
 - docker run -i mypaas ansible-playbook -i "localhost," -c local main.yml --syntax-check
