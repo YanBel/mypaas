@@ -19,8 +19,8 @@ RUN echo "===> Adding Ansible's PPA..."  && \
     echo "===> Adding hosts for convenience..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
-RUN pip install --upgrade pip && \
-    pip install ovh
+RUN     pip install --upgrade pip && \
+        pip install ovh
 RUN     mkdir /mypaas
 ADD     . /mypaas/
 WORKDIR /mypaas
@@ -33,5 +33,5 @@ ONBUILD  RUN  \
 # default command: display Ansible version
 
 CMD [ "ansible-playbook", "--version" ]
-RUN sh genpass.sh
-RUN echo "Container Ready"
+RUN     sh genpass.sh
+RUN     echo "Container Ready"
