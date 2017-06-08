@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
 RUN echo "===> Adding Ansible's PPA..."  && \
     echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main" | tee /etc/apt/sources.list.d/ansible.list           && \
