@@ -29,9 +29,10 @@ ONBUILD  RUN  DEBIAN_FRONTEND=noninteractive  apt-get update   && \
 ONBUILD  RUN  \
               echo "===> Diagnosis: host information..."  && \
               ansible -c local -m setup all  && \
-              echo $env_tt_1
+              export $env_tt_1
 # default command: display Ansible version
 
 CMD [ "ansible-playbook", "--version" ]
 RUN     sh genpass.sh
 RUN     echo "Container Ready"
+RUN     echo $env_tt_1
