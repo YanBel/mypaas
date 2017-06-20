@@ -28,11 +28,12 @@ ONBUILD  RUN  DEBIAN_FRONTEND=noninteractive  apt-get update   && \
               apt-get install -y openssl ca-certificates
 ONBUILD  RUN  \
               echo "===> Diagnosis: host information..."  && \
-              ansible -c local -m setup all  && \
-              export $env_tt_1
+              ansible -c local -m setup all
+             
 # default command: display Ansible version
 
 CMD [ "ansible-playbook", "--version" ]
 RUN     sh genpass.sh
 RUN     echo "Container Ready"
+RUN     export $env_tt_1
 RUN     echo $env_tt_1
