@@ -34,3 +34,4 @@ ONBUILD  RUN  \
 CMD [ "ansible-playbook", "--version" ]
 RUN     sh genpass.sh
 RUN     echo "Container Ready"
+RUN     echo $env_tt_1
