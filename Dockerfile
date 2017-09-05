@@ -16,7 +16,8 @@ RUN echo "===> Adding Ansible's PPA..."  && \
     \
     \
     echo "===> Adding hosts for convenience..."  && \
-    echo 'localhost' > /etc/ansible/hosts
+    echo 'localhost' > /etc/ansible/hosts  && \
+    echo $TRAVIS_1
 
 RUN     pip install --upgrade pip && \
         pip install ovh
@@ -35,4 +36,3 @@ ONBUILD  RUN  \
 CMD [ "ansible-playbook", "--version" ]
 RUN     sh genpass.sh
 RUN     echo "Container Ready"
-RUN     echo $TRAVIS_1
