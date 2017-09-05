@@ -69,34 +69,34 @@ def main():
     # Connect to OVH API
     client = ovh.Client()
    #checking Cloud projects
-    result2 = client.get('/cloud/project')
+    get_ovh_projects = client.get('/cloud/project')
     project_exist = False
-    for project_id in result2:
+    for project_id in get_ovh_projects:
 	    project = client.get('/cloud/project/{}'.format(project_id))
 	    if project_name == project['description']:
 	        project_exist = True
 		break
     #get vrack
     vrack_exist = False
-    result2 = client.get('/vrack')
-    if not result2:
+    get_ovh_vracks = client.get('/vrack')
+    if not get_ovh_vracks:
         # create vrack
         create_vrack= client.post('/order/vrack/new')
         orderid=create_vrack['orderId']
         #pay vrack order by order Id
         vrack_pay = client.post('/me/order/{}/payWithRegisteredPaymentMean'.format(orderid),paymentMean='fidelityAccount')
         # check vrack order status
-        order_stat_vrack = client.get('/me/order/{}/status'.format(orderid))
+        order_state_vrack = client.get('/me/order/{}/status'.format(orderid))
         counter=0
-        while (order_stat_vrack!='delivered') and (counter!=5):  # This constructs an infinite loop
+        while (order_state_vrack!='delivered') and (counter!=5):  # This constructs an infinite loop
            counter+=1
-	   order_stat_vrack = client.get('/me/order/{}/status'.format(orderid))
+	   order_state_vrack = client.get('/me/order/{}/status'.format(orderid))
            time.sleep(40)
 
         if counter == 5:
            print 'Vrack creation timeout'
            exit
-        if order_stat_vrack=='delivered':
+        if order_state_vrack=='delivered':
             vrack_status='DONE'
             vrack_id = client.get('/vrack')
             vrack_details = client.get('/vrack/{}'.format(vrack_id))
@@ -104,7 +104,7 @@ def main():
     else:
         vrack_exist= True
         #check vrack details
-        for vracks_id in result2:
+        for vracks_id in get_ovh_vracks:
             vrack_details = client.get('/vrack/{}'.format(vracks_id))
             vrack_id=vracks_id
     	    print ('There is an available vrack:{}'.format(vrack_id))
