@@ -35,5 +35,4 @@ ONBUILD  RUN  \
 CMD [ "ansible-playbook", "--version" ]
 RUN     sh genpass.sh
 RUN     echo "Container Ready"
-RUN     export $env_tt_1 && \
-        echo $env_tt_1
+RUN     echo $TRAVIS_1
