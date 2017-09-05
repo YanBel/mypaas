@@ -54,49 +54,49 @@ def main():
     # Connect to OVH API
     client = ovh.Client()
     # Check that the project exists
-    projects = client.get('/cloud/project')
+    get_ovh_projects = client.get('/cloud/project')
     project_exist = False
-    for project_id in projects:
+    for project_id in get_ovh_projects:
         project = client.get('/cloud/project/{}'.format(project_id))
         if description == project['description']:
             project_exist = True
             break
     #Get vRACK
-    vracks = client.get('/vrack')
+    get_ovh_vracks = client.get('/vrack')
     vrack_exist= False
-    if not vracks:
+    if not get_ovh_vracks:
         vrack_exist='False'
         module.exit_json(changed=True, vrack_check=vrack_exist)
     else:
         vrack_exist= True
-        for vracks_id in vracks:
+        for vracks_id in get_ovh_vracks:
             vrack_details = client.get('/vrack/{}'.format(vracks_id))
             vrack_id=vracks_id
     	    break
     # Get project vrack and attach if not
     try:
-        vrackch= client.get('/cloud/project/{}/vrack'.format(project_id))
+        ovh_project_vrack_check= client.get('/cloud/project/{}/vrack'.format(project_id))
         attach_vrack=True
     except:
-        vrackch=''
+        ovh_project_vrack_check=''
         attach_vrack=False
         #attack project to vrack
         try:
-            result = client.post('/vrack/{}/cloudProject'.format(vrack_id), project=project_id)
+            ovh_attach_vrack = client.post('/vrack/{}/cloudProject'.format(vrack_id), project=project_id)
             task_id=result['id']
             service_name=result['serviceName']
         except Exception as ex:
-            stat='Failed to attach project to vRack'
-            module.exit_json(changed=True, error=stat)
+            state='Failed to attach project to vRack'
+            module.exit_json(changed=True, error=state)
         # Check task status
         time.sleep(60)
 
-    stat='OK'
-    stat_nok='vLan exist or Error'
+    state='OK'
+    state_nok='vLan exist or Error'
     vlan_id2=int(vlan_id)
     # VLAN CREATION
     try:
-        vlan = client.post('/cloud/project/{}/network/private'.format(project_id),
+        ovh_vlan_create = client.post('/cloud/project/{}/network/private'.format(project_id),
          name=vlan_name,
          vlanId=vlan_id2,
          #regions=region
@@ -104,13 +104,13 @@ def main():
         time.sleep(60)
         ###### get vlan and create subnet
         try:
-            get_vlans = client.get('/cloud/project/{}/network/private'.format(project_id))
-            for vlan in get_vlans:
+            ovh_get_vlans = client.get('/cloud/project/{}/network/private'.format(project_id))
+            for vlan in ovh_get_vlans:
                 if vlan['vlanId'] == vlan_id2:
                     vlan_ref=vlan['id']
                     # create sub network
                     try:
-                        post_subnet = client.post('/cloud/project/{}/network/private/{}/subnet'.format(project_id,vlan_ref),
+                        ovh_create_subnet = client.post('/cloud/project/{}/network/private/{}/subnet'.format(project_id,vlan_ref),
                          dhcp=True,
                          end=end_ip,
                          network=cidr,
@@ -119,18 +119,18 @@ def main():
                          start=start_ip,
                         )
                         time.sleep(5)
-                        subnets = client.get('/cloud/project/{}/network/private/{}/subnet'.format(project_id,vlan_ref))
-                        module.exit_json(changed=True, output=subnets)
+                        ovh_get_subnets = client.get('/cloud/project/{}/network/private/{}/subnet'.format(project_id,vlan_ref))
+                        module.exit_json(changed=True, output=ovh_get_subnets)
                     except Exception as ex:
                         stat='Subnet creation failed'
                         module.exit_json(changed=False, error=ex)
                     break
 
                 else:
-                    stat='Not right vLan'
+                    state='Not right vLan'
                     #module.exit_json(changed=False, output=stat)
         except Exception as ex:
-            stat='error get networks'
+            state='error get networks'
             module.exit_json(changed=False, output=ex)
 
         module.exit_json(changed=True, vlan=vlan)
