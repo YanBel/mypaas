@@ -17,10 +17,8 @@ RUN echo "===> Adding Ansible's PPA..."  && \
     \
     echo "===> Adding hosts for convenience..."  && \
     echo 'localhost' > /etc/ansible/hosts  && \
-    echo "---------------" > /etc/tmp_test_ev  && \
+    export $TRAIS_1  && \
     echo $TRAVIS_1 >> /etc/tmp_test_ev  && \
-    echo "---------------" >> /etc/tmp_test_ev  && \
-    cat /etc/tmp_test_ev
 
 RUN     pip install --upgrade pip && \
         pip install ovh
