@@ -1,7 +1,7 @@
 # mypaas
 MyPaas by D2-SI is an Ansible playbook for startups or small companies which want to build a modern and fully automated infrastructure.
 
-This infrastructure will be composed by :
+This infrastructure will be composed by:
  - Ubuntu 16.04 VPS VMs on OVH Public Cloud
  - Docker Swarm
  - A software factory
