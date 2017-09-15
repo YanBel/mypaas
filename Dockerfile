@@ -16,7 +16,7 @@ RUN echo "===> Adding Ansible's PPA..."  && \
     \
     \
     echo "===> Adding hosts for convenience..."  && \
-    echo 'localhost' > /etc/ansible/hosts  && \
+    echo 'localhost' > /etc/ansible/hosts
 
 
 RUN     pip install --upgrade pip && \
