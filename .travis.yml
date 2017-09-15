@@ -16,8 +16,6 @@ install:
   - pip install ansible==1.9.1
 
 script:
-#Test
-- echo $TRAVIS_1 $TRAVIS_2
 # Building Docker image to run mypaas playbook
 - docker build -t "mypaas" .
 # Check Role syntax
