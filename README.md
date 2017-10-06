@@ -1,7 +1,4 @@
-# mypaas  
-
-
-[![Build Status](https://www.travis-ci.org/YanBel/mypaas.svg?branch=master)](https://travis-ci.org/YanBel/mypaas)
+# mypaas  [![Build Status](https://www.travis-ci.org/YanBel/mypaas.svg?branch=master)](https://travis-ci.org/YanBel/mypaas)
 
 MyPaas by D2-SI is an Ansible playbook for startups or small companies which want to build a modern and fully automated infrastructure.
 
