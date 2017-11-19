@@ -26,6 +26,7 @@ This infrastructure will be composed by:
   - Vulnerability scanner with OpenVAS and CoreOS Clair (soon)
  - And more !
  
+ 
 ## Preparation
 
  1. Create a free account on DatadogHQ and get the api key, and the app key (`datadog.api_key` and `datadog.app_key`)
